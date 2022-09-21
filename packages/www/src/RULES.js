@@ -98,7 +98,7 @@ module.exports = [{
 },
 {
     title: 'md5格式(32位)',
-    rule: /^([a-f\d]{32}|[A-F\d]{32})$/,
+    rule: /^[a-fA-F0-9]{32}$/,
     examples: ['21fe181c5bfc16306a6828c1f7b762e8'],
 },
 {
@@ -414,8 +414,9 @@ module.exports = [{
 },
 {
     title: '整数',
-    rule: /^-?[1-9]\d*$/,
-    examples: [-1231, 123]
+    rule: /^(?:0|(?:-?[1-9]\d*))$/,
+    examples: [-1231, 123, 0],
+    counterExamples: ['01']
 },
 {
     title: '浮点数',
@@ -434,5 +435,17 @@ module.exports = [{
     rule: /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
     examples: ['90203918@qq.com', 'nbilly@126.com', '啦啦啦@126.com']
 
+},
+
+{
+    title: '域名(非网址, 不包含协议)',
+    rule: /^([0-9a-zA-Z-]{1,}\.)+([a-zA-Z]{2,})$/,
+    examples: ['www.baidu.com',
+        'baidu.com',
+        'baidu.com.cn',
+        'api.baidu.com',
+        'nodejs.org',
+        'nodejs.cn'],
+    counterExamples: ['http://baidu.com', 'https://baidu.com', 'www.百度.com']
 }
 ];
